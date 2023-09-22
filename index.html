@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <style>
+        body{
+            margin: 15%;
+            background-color: rgb(233, 233, 235);
+            font-family: Arial, Helvetica, sans-serif
+
+        }
+        h2{
+            margin: 5%;
+            background-color: rgb(214, 226, 226);
+            color: rgb(22, 21, 21);
+            font-family: 'Times New Roman', Times, serif;
+
+
+        }
+        h1{
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Formulários</h1>
+    <form name="submit-to-google-sheet2">    
+<h2>Qual estilo de roupa você prefere?</h2>
+
+
+    <input name="roupa1" type="checkbox" value="sim" >
+<label name="roupa1" for="roupa1">
+    Salto
+</label>
+
+<input name="roupa2" type="checkbox" value="sim" >
+<label name="roupa2" for="roupa2">
+    Short
+</label>
+
+<input name="roupa3" type="checkbox" value="sim" >
+<label name="roupa3" for="roupa3">
+   Calça
+</label>
+
+<input name="roupa4" type="checkbox" value="sim" >
+<label name="roupa4" for="roupa4">
+    Vestido
+</label>
+
+<input name="roupa5" type="checkbox" value="sim" >
+<label name="roupa5" for="roupa5">
+    Camiseta
+</label>
+
+
+<h2>Qual cor é a sua favorita?</h2>
+<input name="cor1" type="checkbox" value="sim" >
+<label name="cor1" for="cor1">
+    Rosa
+</label>
+
+
+<input name="cor2" type="checkbox" value="sim" >
+<label name="cor2" for="cor2">
+    Branco
+</label>
+
+<input name="cor3" type="checkbox" value="sim" >
+<label name="cor3" for="cor3">
+    Azul
+</label>
+
+
+<input name="cor4" type="checkbox" value="sim" >
+<label name="cor4" for="cor4">
+    Preto
+</label>
+
+
+<h2>Você gosta de seguir a moda?</h2>
+<input name="SIM" type="radio" value="sim" >
+<label name="SIM" for="SIM">
+ Sim
+ </label>
+ <input name="NÃO" type="radio" value="não" >
+<label name="NÃO" for="NÃO">
+ Não
+ </label>
+
+
+<h2>Já esteve em um desfile de moda?</h2>
+<input name="vezes" type="radio" id="inlineCheckbox1" value="0">
+<label name="vezes" for="não">Nunca</label>
+<input name="vezes" type="radio" id="inlineCheckbox1" value="1a3">
+<label name="vezes" for="não">1 a 3 vezes</label>
+<input name="vezes" type="radio" id="inlineCheckbox1" value="3a4">
+<label name="vezes" for="não">3 a 4 vezes</label>
+<input name="vezes" type="radio" id="inlineCheckbox1" value=">4">
+<label name="vezes" for="não">Acima de 4</label>
+
+
+
+<h2>Qual o seu modelo(a) favorito(a)?</h2>
+<input name="sugestao" type="text" placeholder="Mensagem">
+<button type="submit">Salvar</button>
+</form>
+
+
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz0cgrO4OpyGdC-RPqQDk-O2B4KPdFe2NkmeAiRVnDdeG9j12DviOAqTbAdd-y29aug/exec'
+    const form = document.forms['submit-to-google-sheet2']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+      form.reset();
+    })
+  </script>
+
+
+
+
+<!-- var sheetName = 'Sheet2'
+var scriptProp = PropertiesService.getScriptProperties()
+
+
+function intialSetup () {
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+
+function doPost (e) {
+  var lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+
+  try {
+    var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    var sheet = doc.getSheetByName(sheetName)
+
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    var nextRow = sheet.getLastRow() + 1
+
+
+    var newRow = headers.map(function(header) {
+      return header === 'timestamp' ? new Date() : e.parameter[header]
+    })
+
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+
+  finally {
+    lock.releaseLock()
+  }
+} -->
+
+
+</body>
+</html>
